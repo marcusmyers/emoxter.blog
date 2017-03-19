@@ -1,0 +1,16 @@
+baseurl = "http://www.emoxter.com/"
+languageCode = "en-us"
+Title = "eMoxter"
+canonifyurls = true
+paginate = 5
+theme = "casper"
+
+[params]
+  author = "Mark Myers"
+  author_location = "OH, U.S.A"
+  cover = "img/emoxtercom.jpg"
+  description = "DevOps, EdTech and Coaching"
+  googleAnalyticsID = "UA-39275230-1"
+  twitterName = "markmyers"
+  githubName = "marcusmyers"
+  hideHUGOSupport = true

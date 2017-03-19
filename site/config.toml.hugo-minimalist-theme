@@ -1,0 +1,20 @@
+baseurl = "http://emoxter.com/"
+languageCode = "en-us"
+Title = "eMoxter"
+canonifyurls = true
+paginate = 5
+theme = "hugo-minimalist-theme"
+googleAnalytics = "UA-39275230-1"
+
+[params]
+  site_author = "Mark Myers"
+  site_description = "DevOps, EdTech and Coaching"
+  location = "OH, U.S.A"
+  avatar = "https://en.gravatar.com/userimage/45065909/fdfecd0503baac2afb5abc0f08d3bc37.jpg"
+  header_background = "img/emoxtercom.jpg"
+  header_title = "eMoxter"
+  google_analytics = "UA-39275230-1"
+
+[social]
+  twitter = "markmyers"
+  github  = "marcusmyers"
