@@ -9,6 +9,6 @@ services:
       - hugo-data
 
   hugo-data:
-    image: marcusmyers/blog
+    image: marcusmyers/blog:new
     volumes:
       - /usr/share/nginx/html
