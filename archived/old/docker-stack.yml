@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  blog:
+    image: marcusmyers/blog:20170507
+    ports:
+      - 1313:1313
+    deploy:
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 1
