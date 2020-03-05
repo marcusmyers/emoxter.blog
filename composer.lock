@@ -1168,16 +1168,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.0.3",
+            "version": "v7.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1c5caccad9dc49c9233610d1c92a5a7e46ecaeba"
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1c5caccad9dc49c9233610d1c92a5a7e46ecaeba",
-                "reference": "1c5caccad9dc49c9233610d1c92a5a7e46ecaeba",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b93848b43f1564521b3f0605f06a1b392391f6ff",
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff",
                 "shasum": ""
             },
             "require": {
@@ -1315,7 +1315,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-03-04T16:21:04+00:00"
+            "time": "2020-03-04T22:37:20+00:00"
         },
         {
             "name": "laravel/nova",
@@ -4599,16 +4599,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "16e0df47042a42bcc855ec5ec5c5cff26d7b3f78"
+                "reference": "b8dbf7791c81619161270d580a64a30bad41b832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/16e0df47042a42bcc855ec5ec5c5cff26d7b3f78",
-                "reference": "16e0df47042a42bcc855ec5ec5c5cff26d7b3f78",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/b8dbf7791c81619161270d580a64a30bad41b832",
+                "reference": "b8dbf7791c81619161270d580a64a30bad41b832",
                 "shasum": ""
             },
             "require": {
@@ -4634,6 +4634,9 @@
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
                 "laravel": {
                     "providers": [
                         "Facade\\Ignition\\IgnitionServiceProvider"
@@ -4663,7 +4666,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2020-03-02T16:10:55+00:00"
+            "time": "2020-03-05T12:32:22+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -5306,16 +5309,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.10.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9"
+                "reference": "451c3cd1418cf640de218914901e51b064abb093"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/451c3cd1418cf640de218914901e51b064abb093",
+                "reference": "451c3cd1418cf640de218914901e51b064abb093",
                 "shasum": ""
             },
             "require": {
@@ -5365,7 +5368,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2020-01-20T15:57:02+00:00"
+            "time": "2020-03-05T15:02:03+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
