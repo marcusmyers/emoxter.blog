@@ -43,6 +43,20 @@ services:
      # - ./docker/mysql/logs:/var/log/mysql
     networks:
      - vessel
+  horizon:
+    build:
+      context: ./docker/app
+      dockerfile: Dockerfile
+    image: vessel/app
+    environment:
+      CONTAINER_ENV: "${APP_ENV}"
+      XDEBUG_HOST: "${XDEBUG_HOST}"
+      WWWUSER: "${WWWUSER}"
+    volumes:
+     - .:/var/www/html
+    command: "php artisan horizon"
+    networks:
+     - vessel
   redis:
     image: redis:alpine
     volumes:
