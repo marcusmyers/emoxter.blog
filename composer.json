@@ -1,12 +1,18 @@
 {
-    "name": "laravel/laravel",
+    "name": "marcusmyers/emoxter_site",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "eMoxter Website",
     "keywords": [
-        "framework",
-        "laravel"
+        "emoxter",
+        "laravel",
+        "coaching"
     ],
-    "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
     "require": {
         "php": "^7.2.5",
         "calebporzio/bear-sync": "^1.2",
@@ -16,7 +22,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "predis/predis": "^1.1",
-        "shipping-docker/vessel": "^5.0"
+        "shipping-docker/vessel": "^5.0",
+        "laravel/nova": "~3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
