@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>eMoxter</title>
+        <meta name="author">
+        <meta name="description" content="DevOps, EdTech and Coaching">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="Hugo 0.19" />
+        <link href="http://emoxter.com/post/index.xml" rel="alternate" type="application/rss+xml" title="eMoxter" />
+        <link href="http://emoxter.com/post/index.xml" rel="feed" type="application/rss+xml" title="eMoxter" />
+        <link href='//fonts.googleapis.com/css?family=Roboto:400,300,700|Noto+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://emoxter.com/css/styles.css">
+        <link rel="icon" href="http://emoxter.com/favicon.ico">
+        <link rel="apple-touch-icon" href="http://emoxter.com/apple-touch-icon.png" />
+        <link rel="stylesheet" href="http://emoxter.com/css/highlightjs/monokai.css">
+        <script src="http://emoxter.com/js/vendor/modernizr-2.8.0.min.js"></script>
+        
+        <style>
+        .site-header h2 .logo {
+        background: url(http://emoxter.com/img/emoxtercom.jpg) no-repeat 0 0;
+        }
+        @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+          .site-header h2 .logo {
+            background-image: url(http://emoxter.com/img/emoxtercom.jpg);
+        }}
+       .site-header {
+         background: #2a373d url(http://emoxter.com/img/emoxtercom.jpg) no-repeat center center;
+         z-index: -1;
+        }
+        </style>
+    </head>
+    <body>
+        
+        <header class="site-header">
+          <div class="transparent-layer">
+              <h2>eMoxter</h2>
+              <h3>DevOps, EdTech and Coaching</h3>
+          </div>
+        </header>
+
+
+<div class="container clearfix">
+    <main role="main" class="content">
+        <article class="post">
+            <a class="btn home" href="http://emoxter.com/" title="">&laquo; </a>
+            
+<h1><a href="http://emoxter.com/post/creating-a-windows-xp-vagrant-box/" title="Creating a Windows XP Vagrant box">Creating a Windows XP Vagrant box</a></h1>
+
+<footer class="post-info"> <span class="post-meta"><time datetime="2014.04.17">2014.04.17</time>
+
+</span>
+</footer>
+
+            
+
+<p><a href="http://vagrantup.com">Vagrant</a> is a great tool to use when creating test boxes.  Although it is commonly used with *nix servers, but a lot of the time we may want to test other things such as a Windows box.  Because of obvious licensing issues there are NO Windows Vagrant boxes published online.</p>
+
+<p>Vagrant is a great tool to use with <a href="http://www.virtualbox.org">VirtualBox</a>, until recently they added VMWare Fusion and Workstation for a price. VirtualBox is free and is an easy tool to get started with when using Vagrant.</p>
+
+<p><a href="#resources">Post Resources</a></p>
+
+<blockquote>
+<h2 id="note">Note</h2>
+
+<p>Vagrant now defaults to WinRM for Windows</p>
+</blockquote>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Here are the steps we will go through in this guide.  (This assumes you already have Vagrant and VirtualBox installed.)</p>
+
+<ol>
+<li>Install <a href="https://github.com/WinRB/vagrant-windows">vagrant-windows</a> plugin</li>
+<li>Create and configure a Windows XP guest base box</li>
+</ol>
+
+<h2 id="install-vagrant-windows-plugin-a-name-vagrant-window-a">Install vagrant-windows plugin <a name=\"vagrant-window\"></a></h2>
+
+<p>This will be the easiest step.</p>
+
+<p><code>vagrant plugin install vagrant-windows</code></p>
+
+<h2 id="creating-a-base-box">Creating a Base Box</h2>
+
+<p>Out of the box the <a href="https://github.com/WinRB/vagrant-windows">vagrant-windows</a> plugin supports the following Windows Operating Systems:</p>
+
+<ul>
+<li>Windows 7</li>
+<li>Windows 8</li>
+<li>Windows Server 2008</li>
+<li>Windows Server 2008 R2</li>
+<li>Windows Server 2012</li>
+</ul>
+
+<p>So setting up XP will take a little more configuration.  If you are setting up one of the supported operating systems please follow the guide on the <a href="https://github.com/WinRB/vagrant-windows">vagrant-windows</a> page.</p>
+
+<h3 id="install-xp">Install XP</h3>
+
+<p>This guide is not created to show you how to create a Windows XP guest on VirtualBox but here are is what I used for creating my guest box.</p>
+
+<ul>
+<li>Name: XP-BASE-BOX (We will need the name to create the base box)</li>
+<li>Memory: 512MB</li>
+<li>Hard Drive: 20GB (Dynamically Allocated)</li>
+</ul>
+
+<p>n\You can obviously change these settings as you see fit.  But these settings are what we used to hopefully help make the vagrant box as small as possible.  Our vagrant box ended up being ~2GB after the fact.</p>
+
+<h3 id="needed-software-for-xp">Needed software for XP</h3>
+
+<p>Once you have your base box created we need to install a couple things to make it work with Vagrant.</p>
+
+<ul>
+<li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=7217">PowerShell</a> *This will get upgraded to 2.0 when you install WinRM 2.0</li>
+<li><a href="http://www.microsoft.com/en-us/download/details.aspx?id=16818">WinRM 2.0</a></li>
+<li><a href="http://homepage1.nifty.com/emk/symlink-1.06-x86.cab">Symbolic Link Driver for XP</a></li>
+<li><a href="http://sshwindows.sourceforge.net/">SSH Server</a></li>
+</ul>
+
+<h3 id="winrm-windows-remote-management">WinRM (Windows Remote Management)</h3>
+
+<p>To get started with with WinRM you must set the following registry key to zero in order to all WinRM to work \&ldquo;remotely\&rdquo; on Windows XP.</p>
+
+<pre><code>HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa forceguest 0
+</code></pre>
+
+<p>Next we will need to configure WinRM on the XP base box.  Open up the command prompt and type these in the prompt.</p>
+
+<pre><code>C:\\&gt; winrm quickconfig -q
+C:\\&gt; winrm set winrm/config/winrs @{MaxMemoryPerShellMB=\&quot;512\&quot;}
+C:\\&gt; winrm set winrm/config @{MaxTimeoutms=\&quot;1800000\&quot;}
+C:\\&gt; winrm set winrm/config/service @{AllowUnencrypted=\&quot;true\&quot;}
+C:\\&gt; winrm set winrm/config/service/auth @{Basic=\&quot;true\&quot;}
+C:\\&gt; sc config WinRM start= auto
+</code></pre>
+
+<p>The settings above create defaults for WinRM.
+.</p>
+
+<h3 id="symbolic-link-driver">Symbolic Link Driver</h3>
+
+<p>The symbolic link driver makes it possible to share folders between your computer and the vagrant box, checkout <a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Vagrant Synced Folders</a>. Once you have downloaded the driver open the <code>.cab</code> file and copy all the files (<code>ln.exe, senable.exe, symlink.sys</code>) to <code>C:\\WINDOWS</code> directory. Open up the command prompt and type the following:</p>
+
+<pre><code>&gt; cd C:\\WINDOWS
+C:\\WINDOWS&gt; senable.exe install
+</code></pre>
+
+<p>Windows 7 came with a utility called <code>mklink</code> that creates symbolic links like <code>ln</code> for *nix type systems. Once again <code>vagrant-windows</code> supports Windows 7 and up so it will be looking for the <code>mklink</code> to create that synced folder.  In order to fake <code>mklink</code> for <code>vagrant-window</code> we need to do the following steps.</p>
+
+<p>####mklink.cmd
+Open up notepad and paste the following:</p>
+
+<pre><code>@echo off
+
+SET DIR=%~dp0%
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command \&quot;&amp; '%DIR%Symlink.ps1' %*\&quot;
+
+pushd \&quot;%DIR%\&quot;
+\&quot;%DIR%senable.exe\&quot; start
+popd
+</code></pre>
+
+<p>Save this file as <code>mklink.cmd</code> to <code>C:\\WINDOWS</code></p>
+
+<p>####Symlink.ps1</p>
+
+<p>Open up notpad and paste the following:</p>
+
+<pre><code>param (
+ [string]$symlinktype,
+ [string]$link,
+ [string]$target
+)
+
+$scriptpath = $MyInvocation.MyCommand.Path
+$ScriptDir = Split-Path $scriptpath
+
+$senable = Join-Path \&quot;$ScriptDir\&quot; senable.exe
+$ln = Join-Path \&quot;$ScriptDir\&quot; ln.exe
+
+pushd \&quot;$ScriptDir\&quot;
+&amp; cmd /c \&quot;$senable\&quot; install
+popd
+&amp; cmd /c \&quot;$ln\&quot; -s \&quot;$target\&quot; \&quot;$link\&quot;
+</code></pre>
+
+<p>Save this file as <code>Symlink.ps1</code> to <code>C:\\WINDOWS</code></p>
+
+<p>###The Vagrant File
+Vagrant loads multiple <code>Vagrantfile</code>s read the following page to understand vagrant file load ordering, <a href="http://docs.vagrantup.com/v2/vagrantfile/#load-order">Vagrantfile Load Order</a>. We can actually package a <code>Vagrantfile</code> with the box.  Anything that is in the <code>Vagrantfile</code> that you package with the box does not need to be in the project directory <code>Vagrantfile</code>.  Here&rsquo;s the <code>Vagrantfile</code> we will be packing with the base box. (I created a <code>XP</code> folder inside my <code>~/Documents</code> folder on my mac and put the <code>Vagrantfile</code> in it.)</p>
+
+<pre><code>Vagrant.configure(\&quot;2\&quot;) do |config|
+
+  # Configure base box parameters
+  config.vm.box = \&quot;windowsxp\&quot;
+  config.vm.box_url = \&quot;./windowsxp.box\&quot;
+  config.vm.guest = :windows
+
+  config.vm.boot_timeout = 600
+  # Port forward WinRM and RDP
+  config.vm.network :forwarded_port, guest: 3389, host: 3389
+  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: \&quot;winrm\&quot;, auto_correct: true
+
+  # Provider 
+  config.vm.provider \&quot;virtualbox\&quot; do |v|
+    v.gui =true
+  end
+end
+</code></pre>
+
+<h3 id="creating-the-vagrant-box">Creating the vagrant box</h3>
+
+<p>Here&rsquo;s the command to create our base xp box:</p>
+
+<pre><code>:~/Documents/XP$ vagrant package --base XP-BASE-BOX --output windowsxp.box --vagrantfile ./Vagrantfile
+</code></pre>
+
+<h4 id="breakdown">Breakdown</h4>
+
+<pre><code>--base XP-BASE-BOX
+</code></pre>
+
+<p>The <code>--base</code> command takes an argument of VirtualBox machine name to package as a base box.</p>
+
+<pre><code>--output windowsxp.box
+</code></pre>
+
+<p>The <code>--output</code> command takes an argument to name you newly packaged box. If you don&rsquo;t use the <code>--output</code> command it defaults to <code>package.box</code>.</p>
+
+<pre><code>--vagrantfile ./Vagrantfile
+</code></pre>
+
+<p>The <code>--vagrantfile</code> command will package a <code>Vagrantfile</code> with your new base box.</p>
+
+<p>##Conclusion
+Creating vagrant boxes aren&rsquo;t that hard to do, especially for operating systems that are still supported.  The truth is we are unfortunately still using XP at work and using a vagrant box to test things is a lot quicker than imaging a machine. We use <a href="http://www.puppetlabs.com">Puppet</a> to manage all our desktops/laptops at work and having a way to test all our platforms using VirtualBox makes it so simple.  In a future post I will discuss how we use this vagrant box.</p>
+
+<h2 id="resources-a-name-resources-a">Resources <a name=\"resources\"></a></h2>
+
+<ul>
+<li><a href="https://github.com/WinRb/vagrant-windows">WinRb/vagrant-windows</a></li>
+<li><a href="http://docs.vagrantup.com/v2/cli/package.html">Vagrant Package Command</a></li>
+<li><a href="http://stackoverflow.com/questions/4339220/is-there-a-way-to-map-a-unc-path-to-a-local-folder-on-windows-2003/18593425#18593425">Symbolic Links in XP</a></li>
+<li><a href="http://schinagl.priv.at/nt/ln/ln.html#symboliclinksforwindowsxp">Symbolic Link Driver for XP</a></li>
+<li><a href="http://www.vagrantbox.es/">Vagrant Boxes</a></li>
+</ul>
+
+            <ul class="share-buttons">
+    <li></li>
+    <li>
+        <a class="icon-facebook-squared" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2femoxter.com%2fpost%2fcreating-a-windows-xp-vagrant-box%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title=""></a>
+    </li>
+    <li>
+        <a class="icon-twitter" href="https://twitter.com/share?text=Creating%20a%20Windows%20XP%20Vagrant%20box&amp;url=http%3a%2f%2femoxter.com%2fpost%2fcreating-a-windows-xp-vagrant-box%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title=""></a>
+    </li>
+    <li>
+        <a class="icon-gplus" href="https://plus.google.com/share?url=http%3a%2f%2femoxter.com%2fpost%2fcreating-a-windows-xp-vagrant-box%2f" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title=""></a>
+    </li>
+    <li>
+        <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2femoxter.com%2fpost%2fcreating-a-windows-xp-vagrant-box%2f&title=Creating%20a%20Windows%20XP%20Vagrant%20box" onclick="window.open(this.href, 'linkedin-share', 'width=600,height=494');return false;" title=""></a>
+    </li>
+</ul>
+
+        </article>
+        <div class="comments">
+            <h3></h3>
+            
+        </div>
+    </main>
+    <aside class="author">
+  <img class="profile-image" src="http://emoxter.com/img/img_2351.jpg" alt="Mark Myers" />
+  <p class="name"> 
+  <strong>Mark Myers</strong></p>
+  <p class="address">OH, U.S.A</p>
+  <p class="link"></p>
+  <ul class="social">
+    
+<li><a href="//twitter.com/markmyers" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//github.com/marcusmyers" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+
+<li><a href="http://emoxter.com/post/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+
+  </ul>
+  <br><br>
+</aside>
+
+</div>
+
+<footer class="main-footer">
+  <div class="container clearfix">
+        <a class="icon-rss" href="http://emoxter.com/post/index.xml" title="RSS"></a>
+        <p>&copy; 2017 &middot; </p>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>window.jQuery || document.write('<script src="http:\/\/emoxter.com\/js\/vendor\/jquery-1.11.0.min.js"></script>')</script>
+<script src="http://emoxter.com/js/plugins.js"></script>
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-39275230-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+
