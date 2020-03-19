@@ -1,0 +1,60 @@
+on: push
+name: Run phpunit testsuite
+jobs:
+  phpunit-test-suite:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [7.4]
+        laravel: [7.*]
+        dependency-version: [prefer-stable]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      run: |
+        echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - uses: actions/cache@v1
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Prepare Laravel Application
+      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
+    - name: Install composer dependencies
+      run: |
+        composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_PASSWORD }}
+        composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+    - name: Generate key
+      run: php artisan key:generate
+
+    - name: Create DB and schemas
+      run: |
+        mkdir -p database/testing
+        touch database/testing/database.sqlite
+        php artisan migrate:install
+        php artisan migrate
+
+    - name: Run Testsuite
+      run: vendor/bin/phpunit
